@@ -13,7 +13,7 @@
 ### 1. Клонируйте проект:
 
 ```bash
-git clone https://github.com/MaksimObozniy/Click_url.git
+git clone https://github.com/MaksimObozniy/URL-Shortener-and-Click-Tracker.git
 ```
 
 ### 2. Установите необходимые зависимости
