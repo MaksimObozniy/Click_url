@@ -59,7 +59,7 @@ def count_clicks(token, short_link):
 
 
 def main():
-    token = env.str("API_KEY")
+    token = env.str("VK_API_KEY")
     user_input = str(input("Введите ссылку: "))
 
 
