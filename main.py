@@ -60,7 +60,7 @@ def main():
     env.read_env()
 
     token = env.str("VK_API_KEY")
-    user_input = str(input("Введите ссылку: "))
+    user_input = input("Введите ссылку: ")
 
 
     if is_shortened_link(user_input):
