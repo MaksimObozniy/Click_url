@@ -2,9 +2,6 @@ import requests
 from environs import Env
 from urllib.parse import urlparse
 
-env = Env()
-env.read_env()
-
 
 def is_shortened_link(url):
     parsed_url = urlparse(url)
@@ -49,16 +46,19 @@ def count_clicks(token, short_link):
     
     response.raise_for_status()
     
-    data = response.json()
+    response_data = response.json()
     
-    if "error" in data:
+    if "error" in response_data:
         return "Ошибка при получении статистики"
     
-    return data.get("response", {}).get("stats", [{}])[0].get("clicks", 0)
+    return response_data.get("response", {}).get("stats", [{}])[0].get("clicks", 0)
 
 
 
 def main():
+    env = Env()
+    env.read_env()
+
     token = env.str("VK_API_KEY")
     user_input = str(input("Введите ссылку: "))
 
