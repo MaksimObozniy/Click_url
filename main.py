@@ -43,23 +43,17 @@ def count_clicks(token, short_link):
     }
     
     response = requests.get(api_url, params=params)
-    
     response.raise_for_status()
-    
     response_data = response.json()
     
-    if "error" in response_data:
-        return "Ошибка при получении статистики"
-    
     return response_data.get("response", {}).get("stats", [{}])[0].get("clicks", 0)
-
 
 
 def main():
     env = Env()
     env.read_env()
-
-    token = env.str("VK_API_KEY")
+    
+    token = env.str("API_KEY")
     user_input = input("Введите ссылку: ")
 
 
@@ -70,19 +64,17 @@ def main():
                 print(clicks_count)
             elif clicks_count is not None:
                 print(f"Количество кликов по ссылке: {clicks_count}")
-            else:
-                print("Не удалось получить количество кликов.")
+                
         except requests.exceptions.HTTPError:
-            print("Ошибка HTTP при запросе!")
+            print("Вы ввели неправильную ссылку или неверный токен")
     else:
         short_link = shorten_link(token, user_input)
         
         if short_link:
             print(f"Сокращенная ссылка: {short_link}")
         else:
-            print("Не удалось сократить ссылку.")
+            print("Вы ввели неправильную ссылку!")
 
 
 if __name__ == "__main__":
     main()
-
