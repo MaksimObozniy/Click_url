@@ -49,6 +49,7 @@ def count_clicks(token, short_link):
     return response_data.get("response", {}).get("stats", [{}])[0].get("clicks", 0)
 
 
+
 def main():
     env = Env()
     env.read_env()
