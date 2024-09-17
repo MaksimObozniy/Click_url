@@ -61,10 +61,7 @@ def main():
     if is_shortened_link(user_input):
         try:
             clicks_count = count_clicks(token, user_input)
-            if isinstance(clicks_count, str):
-                print(clicks_count)
-            elif clicks_count is not None:
-                print(f"Количество кликов по ссылке: {clicks_count}")
+            print(f"Количество кликов по ссылке: {clicks_count}")
                 
         except requests.exceptions.HTTPError:
             print("Вы ввели неправильную ссылку или неверный токен")
