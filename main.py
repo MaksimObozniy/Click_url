@@ -20,12 +20,12 @@ def shorten_link(token, long_url):
     response = requests.get(api_url, params=params)
     response.raise_for_status()  
     
-    data = response.json()
+    response_data = response.json()
     
-    if "error" in data:
+    if "error" in response_data:
         return None
         
-    return data.get("response", {}).get("short_url")
+    return response_data["response"]["short_url"]
 
 
 def count_clicks(token, short_link):
@@ -46,8 +46,7 @@ def count_clicks(token, short_link):
     response.raise_for_status()
     response_data = response.json()
     
-    return response_data.get("response", {}).get("stats", [{}])[0].get("clicks", 0)
-
+    return response_data["response"]["stats"][0]["views"]
 
 
 def main():
@@ -57,13 +56,13 @@ def main():
     token = env.str("VK_API_KEY")
     user_input = input("Введите ссылку: ")
 
-
+    
     if is_shortened_link(user_input):
         try:
             clicks_count = count_clicks(token, user_input)
             print(f"Количество кликов по ссылке: {clicks_count}")
-                
-        except requests.exceptions.HTTPError:
+            
+        except:
             print("Вы ввели неправильную ссылку или неверный токен")
     else:
         short_link = shorten_link(token, user_input)
