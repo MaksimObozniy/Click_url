@@ -54,7 +54,7 @@ def main():
     env = Env()
     env.read_env()
     
-    token = env.str("API_KEY")
+    token = env.str("VK_API_KEY")
     user_input = input("Введите ссылку: ")
 
 
